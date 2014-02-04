@@ -11,7 +11,8 @@ public:
     float vy;
 
     float rad;
-    float rad_sq;
+
+    float mass;
 
     unsigned int bin_sx;
     unsigned int bin_ex;

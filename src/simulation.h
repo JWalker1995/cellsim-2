@@ -1,6 +1,9 @@
 #ifndef SIMULATION_H
 #define SIMULATION_H
 
+// Debug
+#include <iostream>
+
 #include "defs.h"
 #include "bin.h"
 #include "atom.h"
@@ -10,7 +13,7 @@
 class Simulation
 {
 public:
-    Simulation(unsigned int size_x, unsigned int size_y)
+    Simulation(float size_x, float size_y)
         : size_x(size_x)
         , size_y(size_y)
         , bins_x(size_x / BIN_SIZE)
@@ -18,10 +21,10 @@ public:
         , bins(new Bin[bins_x * bins_y])
     {}
 
-    unsigned int size_x;
-    unsigned int size_y;
+    float size_x;
+    float size_y;
 
-    void add_atom(Atom &atom);
+    void add_atom(Atom atom_def);
 
     void step(float time);
 
@@ -36,16 +39,7 @@ protected:
     Bin *bins;
     WeakSet<Atom> atoms;
 
-    /*
-    Bin *get_bin(float x, float y)
-    {
-        unsigned int bin_x = x / BIN_SIZE;
-        unsigned int bin_y = y / BIN_SIZE;
-
-        return bins + bin_x + bin_y * bins_x;
-    }
-    */
-
+    void bounce(Atom *a1, Atom *a2, float dx, float dy, float dsq, float r);
 };
 
 #endif // SIMULATION_H
