@@ -1,9 +1,23 @@
 #include <iostream>
 
-#include "simulation.h"
+#include "window.h"
 
 int main()
 {
+    std::cout << "Creating simulation..." << std::endl;
+    Simulation *sim = new Simulation(1000, 500);
+
+    std::cout << "Starting..." << std::endl;
+
+    Window window(sim);
+    bool res = window.run();
+
+    std::cout << "Ending..." << std::endl;
+
+    delete sim;
+
+    return res;
+/*
     std::cout << "Creating simulation..." << std::endl;
     Simulation sim(1024, 512);
 
@@ -34,4 +48,5 @@ int main()
 
     std::cout << "Ending sucessfully..." << std::endl;
     return 0;
+*/
 }

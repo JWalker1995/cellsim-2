@@ -1,0 +1,12 @@
+Use cases:
+	Double-wide membrane
+	DNA replicator
+
+
+layer(x) : x / 1 % 4
+grow (x) : x / 4 % 2
+
+M(layer(x) = 0) 2M(layer(y) = 1) + M -> Mx 2My M0
+M(layer(x) = 2) 2M(layer(y) = 1) + M -> Mx 2My M2
+M(layer(x) = 0) 2M(layer(y) = 1) + M -> Mx My Mz Mx
+M(layer(x) = 0) 2M(layer(y) = 1) + M -> Mx My Mz Mx

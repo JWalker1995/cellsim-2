@@ -32,14 +32,13 @@ void Simulation::add_atom(Atom atom_def)
     }
 }
 
-void Simulation::step(float time)
+void Simulation::tick(float time)
 {
     WeakSet<Atom>::iterator i = atoms.begin();
     while (i != atoms.end())
     {
         Atom &a = *i;
 
-        std::cout << &a << " " << a.x << " " << a.y << std::endl;
         a.x += a.vx;
         a.y += a.vy;
 
@@ -197,6 +196,24 @@ void Simulation::step(float time)
             }
             x++;
         }
+
+        i++;
+    }
+}
+
+void Simulation::render(int width, int height)
+{
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glOrtho(0, width, height, 0, 0, 1);
+
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+
+    WeakSet<Atom>::iterator i = atoms.begin();
+    while (i != atoms.end())
+    {
+        Atom &a = *i;
 
         i++;
     }

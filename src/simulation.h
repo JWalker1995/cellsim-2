@@ -5,6 +5,7 @@
 #include <iostream>
 
 #include "defs.h"
+#include "gl.h"
 #include "bin.h"
 #include "atom.h"
 
@@ -26,7 +27,8 @@ public:
 
     void add_atom(Atom atom_def);
 
-    void step(float time);
+    void tick(float time);
+    void render(int width, int height);
 
 protected:
     unsigned int bins_x;

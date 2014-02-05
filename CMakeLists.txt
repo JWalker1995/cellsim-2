@@ -16,32 +16,40 @@ set(cellsim_sources
 	src/atom.cpp
 	src/bin.cpp
 	src/simulation.cpp
+	src/window.cpp
 )
 
 set(cellsim_headers
 	src/atom.h
 	src/bin.h
 	src/defs.h
+	src/gl.h
 	src/simulation.h
 	src/util/weakset.h
+	src/window.h
 )
 
 include_directories(src)
 add_executable(${PROJECT_NAME} src/main.cpp ${cellsim_sources} ${cellsim_headers})
 
 
+# X11 dependency
+find_package(X11 REQUIRED)
+include_directories(${X11_INCLUDE_DIRS})
+target_link_libraries(cellsim ${X11_LIBRARIES})
+
 # OpenGL dependency
-#find_package(OpenGL REQUIRED)
-#include_directories( ${OPENGL_INCLUDE_DIRS} )
-#target_link_libraries(cellsim ${OPENGL_LIBRARIES} )
+find_package(OpenGL REQUIRED)
+include_directories(${OPENGL_INCLUDE_DIRS})
+target_link_libraries(cellsim ${OPENGL_LIBRARIES})
 
 # GLEW dependency
-#find_package(GLEW REQUIRED)
-#include_directories( ${GLEW_INCLUDE_DIRS} )
-#target_link_libraries(cellsim ${GLEW_LIBRARIES} )
+find_package(GLEW REQUIRED)
+include_directories(${GLEW_INCLUDE_DIRS})
+target_link_libraries(cellsim ${GLEW_LIBRARIES})
 
 # GLFW dependency
-#add_subdirectory(glfw)
-#include_directories(glfw/include)
-#target_link_libraries(cellsim glfw ${OPENGL_glu_LIBRARY} ${GLFW_LIBRARIES})
-
+find_package(PkgConfig REQUIRED)
+pkg_search_module(GLFW REQUIRED glfw3)
+include_directories(${GLFW_INCLUDE_DIRS})
+target_link_libraries(cellsim ${OPENGL_glu_LIBRARY} ${GLFW_STATIC_LIBRARIES})
